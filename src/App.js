@@ -4,13 +4,14 @@ import { BrowserRouter, Route } from "react-router-dom";
 import React from "react";
 import HomePage from "./pages/HomePage";
 import AdminPage from "./pages/AdminPage";
+import RegisterForm from "./pages/RegisterForm";
 import NavBar from "./components/NavBar";
 import { GET_MOVIES_BY_SEARCH } from "./services/movies.service";
 
 class App extends React.Component {
   state = {
     searchInput: "",
-    resultsQueryUser: null,
+    resultsQueryUser: [],
     isLoading: false,
     notFound: false,
     errorAPI: null,
@@ -39,7 +40,6 @@ class App extends React.Component {
       } else {
         console.log(searchQueryUser.Error);
         this.setState({
-          ...this.state,
           notFound: true,
           errorAPI: searchQueryUser.Error,
           isLoading: false,
@@ -73,6 +73,7 @@ class App extends React.Component {
             )}
           />
           <Route path="/admin" component={AdminPage} />
+          <Route path="/RegisterForm" exact component={RegisterForm} />
         </BrowserRouter>
       </>
     );

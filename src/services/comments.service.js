@@ -108,6 +108,5 @@ export async function DELETE_COMMENT(commentID) {
   );
   const data = await response.json();
   console.log(data);
-
   return data;
 }

@@ -9,8 +9,8 @@ import { GET_COMMENT_BY_ID } from "../services/comments.service";
 class HomePage extends React.Component {
   state = {
     modalShow: false,
-    movieID: null,
-    comments: null,
+    movieID: "",
+    comments: [],
   };
 
   setModalShow = async (bool, movieId) => {
@@ -19,7 +19,7 @@ class HomePage extends React.Component {
       let commentsResults = await GET_COMMENT_BY_ID(movieId); //returns array of comments for movie ID
       this.setState({ comments: commentsResults });
     } else {
-      this.setState({ comments: null, movieID: null });
+      this.setState({ comments: [], movieID: "" });
     }
   };
   render() {
@@ -58,7 +58,7 @@ class HomePage extends React.Component {
               </Row>
             </>
           )}
-          {this.props.resultsQuery && (
+          {this.props.resultsQuery.length > 0 && (
             <SearchSection
               resultsQuery={this.props.resultsQuery}
               setModalShow={this.setModalShow}
@@ -67,18 +67,18 @@ class HomePage extends React.Component {
           )}
           <MovieSection
             setModalShow={this.setModalShow}
-            sectionTitle="Beacuse you saw Pirates..."
-            suggestContent="pirates"
+            sectionTitle="Because you saw Pirates I..."
+            suggestContent="batman"
           />
           <MovieSection
             setModalShow={this.setModalShow}
             sectionTitle="Based in your likes..."
-            suggestContent="nightmare"
+            suggestContent="spider"
           />
           <MovieSection
             setModalShow={this.setModalShow}
             sectionTitle="Could you like also Harry..."
-            suggestContent="harry"
+            suggestContent="iron man"
           />
         </Container>
         <Footer />

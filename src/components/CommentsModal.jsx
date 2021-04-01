@@ -22,7 +22,7 @@ class CommentsModal extends React.Component {
               <h4 className="text-center">Last reviews...</h4>
             </Card.Header>
             <ListGroup variant="flush">
-              {this.props.commentslist ? (
+              {this.props.commentslist.length > 0 ? (
                 this.props.commentslist.map((comment) => (
                   <ListGroup.Item key={comment._id}>
                     {comment.comment}{" "}
@@ -32,7 +32,7 @@ class CommentsModal extends React.Component {
                         borderRadius: "50%",
                         borderColor: "transparent",
                       }}
-                      onClick={() => DELETE_COMMENT(comment._id)}
+                      onClick={() => {DELETE_COMMENT(comment._id)}}
                       variant="outline-danger"
                       className="text-center"
                     >

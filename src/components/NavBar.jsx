@@ -9,6 +9,7 @@ import {
   OverlayTrigger,
   Button,
 } from "react-bootstrap";
+import styles from "../styles/movie_card_styles.module.css";
 
 const NavBar = (props) => {
   return (
@@ -55,15 +56,30 @@ const NavBar = (props) => {
               placement="bottom"
               overlay={
                 <Popover id="popover-positioned-left">
-                  <div className='d-flex'>
+                  <div className="d-flex">
                     <Popover.Title className="text-dark" as="h3">
                       Oh snap!
                     </Popover.Title>
-                    <Button onClick={props.closePopOver} variant="outline-danger" className="ml-auto">x</Button>
+                    <Button
+                      onClick={props.closePopOver}
+                      variant="outline-danger"
+                      className="ml-auto"
+                    >
+                      x
+                    </Button>
                   </div>
                   <Popover.Content>
-                    <strong>Can't foounf your movie!</strong> Please try another
-                    title...
+                    {props.search === "" ? (
+                      <>
+                        <strong>You hadn't type nothing</strong>
+                        <p>Please try Batman</p>
+                      </>
+                    ) : (
+                      <>
+                        <strong>Can't found your movie!</strong>
+                        <p>Please try another title...</p>
+                      </>
+                    )}
                   </Popover.Content>
                 </Popover>
               }
@@ -79,31 +95,15 @@ const NavBar = (props) => {
               </Form>
             </OverlayTrigger>
           </Nav>
-          <div className="navbar-nav btn-group">
-            <button
-              type="button"
-              className="btn btn-ghost dropdown-toggle"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
+          <Navbar className="btn-group">
+            <Button
+              className={styles.commentBtn + " " + styles.gradient}
+              size="lg"
+              onClick={() => props.history.location.push(["/RegisterForm"])}
             >
-              <img
-                src="/assets/src/adult-1.png"
-                className="mr-1"
-                width="32px"
-                alt="usersPic"
-              />
-              <span className="material-icons">User Name</span>
-            </button>
-            <div className="dropdown-menu dropdown-menu-right special-background">
-              <button className="dropdown-item" type="button">
-                Login BackOffice
-              </button>
-              <button className="dropdown-item" type="button">
-                Share
-              </button>
-            </div>
-          </div>
+              <span className="material-icons">Sign Up</span>
+            </Button>
+          </Navbar>
         </Navbar.Collapse>
       </Navbar>
     </>
